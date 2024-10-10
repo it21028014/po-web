@@ -212,3 +212,53 @@ function getCanceledPosForBranch($conn, $mgrCode)
 
     return $canceledCount;  // Return canceled count (will be 0 if no data is found)
 }
+
+
+function getCanceledPos($conn, $mgrCode)
+{
+    $query = "
+        SELECT 
+            LEFT(pcd.APP_REF_NO, 2) AS BRANCH_CODE,
+            pcd.APP_REF_NO,
+            pcd.CL_NIC,
+            IFNULL(DATE(pcd.APPROVE_DATE), 'No date') AS APPROVE_DATE,
+            um.OFFICER_NAME
+        FROM 
+            po_cancel_details pcd
+        JOIN 
+            user_management um ON pcd.REQ_OFFICER COLLATE utf8_general_ci = um.OFFIER_ID COLLATE utf8_general_ci
+        JOIN 
+            mast_branch mb ON LEFT(pcd.APP_REF_NO, 2) COLLATE utf8_general_ci = mb.BRANCH_CODE COLLATE utf8_general_ci
+        WHERE 
+            mb.BR_MANAGER_CODE COLLATE utf8_general_ci = ?
+        ORDER BY 
+            pcd.APPROVE_DATE DESC
+    ";
+
+
+    // Prepare the statement
+    if ($stmt = $conn->prepare($query)) {
+        // Bind the parameter
+        $stmt->bind_param("s", $mgrCode);
+
+        // Execute the statement
+        if (!$stmt->execute()) {
+            error_log("Execution failed: " . $stmt->error);
+            return false;
+        }
+
+        // Get the result
+        $result = $stmt->get_result();
+
+        // Check if any results were returned
+        if ($result && $result->num_rows > 0) {
+            return $result->fetch_all(MYSQLI_ASSOC);  // Return the result as an associative array
+        } else {
+            return [];  // Return an empty array if no results
+        }
+    } else {
+        error_log("Preparation failed: " . $conn->error); // Log preparation error
+    }
+
+    return false; // Return false if something went wrong
+}

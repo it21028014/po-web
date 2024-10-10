@@ -54,90 +54,136 @@ $currentMonthName = date('F');
 
     <body class="min-h-screen overflow-x-hidden font-sans leading-normal bg-cream text-charcoal lg:overflow-auto">
         <main class="flex flex-col flex-1 md:p-0 lg:pt-8 lg:px-8 md:ml-24">
-            <section class="p-4 shadow bg-cream-lighter">
-                <div class="md:flex">
-                    <h2 class="mb-6 text-sm tracking-wide uppercase md:w-1/3 sm:text-lg">Create New User</h2>
+            <section class="rounded-lg shadow p-7 bg-slate-50">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Create User</h2>
+                    <p class="mt-2 text-lg leading-8 text-gray-600">Creation of a new user into the system
                 </div>
-                <form action="insert_user.php" method="post">
-                    <div class="mb-8 md:flex">
-                        <div class="md:w-1/3">
-                            <legend class="text-sm tracking-wide uppercase">User Details</legend>
+
+                <form action="#" method="POST" class="max-w-xl mx-auto mt-16 sm:mt-20">
+
+
+                    <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+
+                        <!-- officer_name Field -->
+                        <div class="sm:col-span-2">
+                            <label for="officer_name" class="block text-sm font-semibold leading-6 text-black">Officer Name</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="officer_name" id="officer_name"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
+                            </div>
                         </div>
-                        <div class="mt-2 md:flex-1 mb:mt-0 md:px-3">
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Officer Name</label>
-                                <input class="w-full p-4 border-0 shadow-inner" type="text" name="officer_name" placeholder="John Doe" required>
+
+                        <div class="sm:col-span-2">
+                            <label for="officer_nic" class="block text-sm font-semibold leading-6 text-black">Officer NIC</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="officer_nic" id="officer_nic"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Officer Email</label>
-                                <input class="w-full p-4 border-0 shadow-inner" type="email" name="officer_email" placeholder="john.doe@example.com" required>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="officer_id" class="block text-sm font-semibold leading-6 text-black">Officer ID</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="officer_id" id="officer_id"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Officer NIC</label>
-                                <input class="w-full p-4 border-0 shadow-inner" type="text" name="officer_nic" placeholder="123456789V" required>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="officer_epf" class="block text-sm font-semibold leading-6 text-black">Officer EPF</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="officer_epf" id="officer_epf"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Officer EPF</label>
-                                <input class="w-full p-4 border-0 shadow-inner" type="text" name="officer_epf" placeholder="EPF Number" required>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="officer_name" class="block text-sm font-semibold leading-6 text-black">Officer Email</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="officer_name" id="officer_emil"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Phone No</label>
-                                <input class="w-full p-4 border-0 shadow-inner" type="tel" name="phone_no" placeholder="(555) 555-5555" required>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="officer_name" class="block text-sm font-semibold leading-6 text-black">Officer Type</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="officer_name" id="officer_name"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="Username" class="block text-sm font-semibold leading-6 text-black">Username</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="Username" id="Username"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="password" class="block text-sm font-semibold leading-6 text-black">Password</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="password" id="password"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="department" class="block text-sm font-semibold leading-6 text-black">Department</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="department" id="department"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="user_role" class="block text-sm font-semibold leading-6 text-black">User Role</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="user_role" id="user_role"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="login_status" class="block text-sm font-semibold leading-6 text-black">Login Status</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="login_status" id="login_status"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
+                            </div>
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="officer_name" class="block text-sm font-semibold leading-6 text-black">Branch Code</label>
+                            <div class="mt-2.5">
+                                <input type="text" name="officer_name" id="branch_code"
+                                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm shadow-purple-500 ring-1 ring-inset ring-purple-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-purple-400 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                     </div>
 
-                    <div class="mb-8 md:flex">
-                        <div class="md:w-1/3">
-                            <legend class="text-sm tracking-wide uppercase">Login Details</legend>
-                        </div>
-                        <div class="mt-2 md:flex-1 mb:mt-0 md:px-3">
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Username</label>
-                                <input class="w-full p-4 border-0 shadow-inner" type="text" name="user_name" placeholder="username" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Password</label>
-                                <input class="w-full p-4 border-0 shadow-inner" type="password" name="pwd" placeholder="password" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Login Status</label>
-                                <select class="w-full p-4 border-0 shadow-inner" name="login_sts" required>
-                                    <option value="A">Active</option>
-                                    <option value="D">Deactivated</option>
-                                </select>
-                            </div>
+
+
+
+                    <div class="sm:col-span-2">
+                        <br>
+
+
+                        <div class="items-center mt-10 bg-purple-700 rounded-md mx-30 align-center">
+                            <button type="submit"
+                                class="block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm">
+                                Create User
+                            </button>
                         </div>
                     </div>
 
-                    <div class="mb-8 md:flex">
-                        <div class="md:w-1/3">
-                            <legend class="text-sm tracking-wide uppercase">Branch Information</legend>
-                        </div>
-                        <div class="mt-2 md:flex-1 mb:mt-0 md:px-3">
-                            <div class="mb-4">
-                                <label class="block text-xs font-bold tracking-wide uppercase">Branch Code</label>
-                                <select class="w-full p-4 border-0 shadow-inner" name="branch_code" required>
-                                    <?php
-                                    // Fetch branch codes from mast_branch table
-                                    include 'db_connection.php'; // Assuming a separate DB connection file
-                                    $query = "SELECT BRANCH_CODE FROM mast_branch";
-                                    $result = mysqli_query($conn, $query);
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option value='{$row['BRANCH_CODE']}'>{$row['BRANCH_CODE']}</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="mb-6 md:flex">
-                        <div class="px-3 text-center md:flex-1 md:text-right">
-                            <input class="button text-cream-lighter bg-brick hover:bg-brick-dark" type="submit" value="Create User">
-                        </div>
-                    </div>
+
+
+
                 </form>
+
             </section>
         </main>
     </body>

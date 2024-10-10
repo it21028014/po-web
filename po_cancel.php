@@ -34,6 +34,7 @@ $poRequests = getPoRequests($conn, $user_code);
 $approvedAmount = getApprovedAmountForCurrentMonth($conn, $user_code);
 $counts = getApprovedAndCanceledCounts($conn, $user_code);
 $canceledCount = getCanceledPosForBranch($conn, $user_code);
+$canceledPos = getCanceledPos($conn, $user_code);
 
 $approvedCount = $counts['approved'];
 
@@ -134,7 +135,7 @@ $currentMonthName = date('F');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($poRequests as $index => $row): ?>
+                        <?php foreach ($canceledPos as $index => $row): ?>
                             <tr>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <div class="flex items-center justify-center gap-3">
@@ -150,12 +151,12 @@ $currentMonthName = date('F');
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <p class="block font-sans text-sm font-normal text-blue-gray-900">
-                                        <?php echo htmlspecialchars($row['APPLICATION_REF_NO']); ?>
+                                        <?php echo htmlspecialchars($row['APP_REF_NO']); ?>
                                     </p>
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <p class="block font-sans text-sm font-normal text-blue-gray-900">
-                                        <?php echo htmlspecialchars($row['REQ_DATE']); ?>
+                                        <?php echo htmlspecialchars($row['APPROVE_DATE']); ?>
                                     </p>
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
