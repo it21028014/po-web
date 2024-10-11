@@ -32,7 +32,7 @@ $branchCode = isset($_SESSION['user']['BRANCH_CODE']) ? $_SESSION['user']['BRANC
 $poRequests = getPoRequests($conn, $user_code);
 $approvedAmount = getApprovedAmountForCurrentMonth($conn, $user_code);
 $counts = getApprovedAndCanceledCounts($conn, $user_code);
-$canceledCount = getCanceledPosForBranch($conn, $user_code);
+$canceledCount = getCanceledPosCount($conn, $user_code);
 $approvedCount = $counts['approved'];
 
 $currentMonthName = date('F');

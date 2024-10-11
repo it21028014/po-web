@@ -29,7 +29,7 @@ $branchCode = isset($_SESSION['user']['BRANCH_CODE']) ? $_SESSION['user']['BRANC
 
 // Fetch data using the query function
 $data = getPoRequestsWithDetails($conn, $user_code);
-$canceledCount = getCanceledPosForBranch($conn, $user_code);
+$canceledCount = getCanceledPosCount($conn, $user_code);
 // Extract data
 $rows = $data['requests'];
 $approvedAmount = $data['totalAmount'];

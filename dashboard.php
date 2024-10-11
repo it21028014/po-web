@@ -36,7 +36,7 @@ $poRequests = getPoRequests($conn, $user_code);
 $approvedAmount = getApprovedAmountForCurrentMonth($conn, $user_code);
 $canceledCount = getApprovedCount($conn, $user_code); // New function for canceled count
 $approvedCount = getApprovedCount($conn, $user_code);
-$canceledCount = getCanceledPosForBranch($conn, $user_code);
+$canceledCount = getCanceledPosCount($conn, $user_code);
 
 $currentMonthName = date('F');
 

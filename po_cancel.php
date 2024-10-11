@@ -30,10 +30,9 @@ $officerName = isset($_SESSION['user']['OFFICER_NAME']) ? $_SESSION['user']['OFF
 $branchCode = isset($_SESSION['user']['BRANCH_CODE']) ? $_SESSION['user']['BRANCH_CODE'] : 'DefaultBranch';
 
 // Fetch data using the query functions
-$poRequests = getPoRequests($conn, $user_code);
 $approvedAmount = getApprovedAmountForCurrentMonth($conn, $user_code);
 $counts = getApprovedAndCanceledCounts($conn, $user_code);
-$canceledCount = getCanceledPosForBranch($conn, $user_code);
+$canceledCount = getCanceledPosCount($conn, $user_code);
 $canceledPos = getCanceledPos($conn, $user_code);
 
 $approvedCount = $counts['approved'];
@@ -119,7 +118,7 @@ $currentMonthName = date('F');
                             </th>
                             <th class="p-4 border-y border-blue-gray-100">
                                 <p class="text-[12px] uppercase tracking-wide font-medium text-gray-400 py-2 px-4 text-center">
-                                    Request Date
+                                    Approved Date
                                 </p>
                             </th>
                             <th class="p-4 border-y border-blue-gray-100">

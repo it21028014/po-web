@@ -1,37 +1,5 @@
 <?php
 
-// Function to fetch Purchase Order Requests
-function getPoRequests($conn, $mgrCode)
-{
-    $query = "
-        SELECT 
-            po.CL_NIC, 
-            po.APPLICATION_REF_NO, 
-            po.REQ_DATE, 
-            um.OFFICER_NAME,
-            mb.BRANCH_CODE  -- Fetching the branch code from mast_branch
-        FROM po_request po
-        JOIN user_management um ON po.REQ_OFFICER = um.OFFIER_ID
-        JOIN mast_branch mb ON mb.BR_MANAGER_CODE = po.MGR_CODE  -- Join with mast_branch using MGR_CODE and BR_MANAGER_CODE
-        WHERE po.REQ_PO_STS = '100' 
-          AND po.MGR_CODE = ?  -- Manager code passed to the function
-        ORDER BY po.REQ_DATE DESC
-    ";
-
-    if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("s", $mgrCode);  // Bind the manager code parameter
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result === FALSE) {
-            die("Query failed: " . $conn->error);
-        }
-
-        return $result->fetch_all(MYSQLI_ASSOC);  // Returning the result as an associative array
-    }
-
-    return false;
-}
 
 function getApprovedAmountForCurrentMonth($conn, $mgrCode)
 {
@@ -261,4 +229,53 @@ function getCanceledPos($conn, $mgrCode)
     }
 
     return false; // Return false if something went wrong
+}
+
+function getCanceledPosCount($conn, $mgrCode)
+{
+    $canceledCount = 0;
+
+    // Get the current month and year
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    // Modified query to get the count of canceled POs for the current month and year
+    $query = "
+        SELECT 
+            COUNT(pcd.APP_REF_NO) AS canceled_count
+        FROM 
+            po_cancel_details pcd
+        JOIN 
+            user_management um ON pcd.REQ_OFFICER COLLATE utf8_general_ci = um.OFFIER_ID COLLATE utf8_general_ci
+        JOIN 
+            mast_branch mb ON LEFT(pcd.APP_REF_NO, 2) COLLATE utf8_general_ci = mb.BRANCH_CODE COLLATE utf8_general_ci
+        WHERE 
+            mb.BR_MANAGER_CODE COLLATE utf8_general_ci = ?
+            AND MONTH(pcd.APPROVE_DATE) = ?
+            AND YEAR(pcd.APPROVE_DATE) = ?
+    ";
+
+    // Prepare the statement
+    if ($stmt = $conn->prepare($query)) {
+        // Bind the manager code, current month, and year parameters
+        $stmt->bind_param("sii", $mgrCode, $currentMonth, $currentYear);
+
+        // Execute the statement
+        if (!$stmt->execute()) {
+            error_log("Execution failed: " . $stmt->error);
+            return false;
+        }
+
+        // Get the result
+        $stmt->bind_result($canceledCount);  // Bind the result to the canceledCount variable
+        $stmt->fetch();
+        $stmt->close();
+
+        // Return the count of canceled POs
+        return $canceledCount ? $canceledCount : 0;
+    } else {
+        error_log("Preparation failed: " . $conn->error);  // Log preparation error
+    }
+
+    return false;  // Return false if something went wrong
 }

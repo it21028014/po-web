@@ -212,3 +212,53 @@ function getCanceledPosForBranch($conn, $mgrCode)
 
     return $canceledCount;  // Return canceled count (will be 0 if no data is found)
 }
+
+
+function getCanceledPosCount($conn, $mgrCode)
+{
+    $canceledCount = 0;
+
+    // Get the current month and year
+    $currentMonth = date('m');
+    $currentYear = date('Y');
+
+    // Modified query to get the count of canceled POs for the current month and year
+    $query = "
+        SELECT 
+            COUNT(pcd.APP_REF_NO) AS canceled_count
+        FROM 
+            po_cancel_details pcd
+        JOIN 
+            user_management um ON pcd.REQ_OFFICER COLLATE utf8_general_ci = um.OFFIER_ID COLLATE utf8_general_ci
+        JOIN 
+            mast_branch mb ON LEFT(pcd.APP_REF_NO, 2) COLLATE utf8_general_ci = mb.BRANCH_CODE COLLATE utf8_general_ci
+        WHERE 
+            mb.BR_MANAGER_CODE COLLATE utf8_general_ci = ?
+            AND MONTH(pcd.APPROVE_DATE) = ?
+            AND YEAR(pcd.APPROVE_DATE) = ?
+    ";
+
+    // Prepare the statement
+    if ($stmt = $conn->prepare($query)) {
+        // Bind the manager code, current month, and year parameters
+        $stmt->bind_param("sii", $mgrCode, $currentMonth, $currentYear);
+
+        // Execute the statement
+        if (!$stmt->execute()) {
+            error_log("Execution failed: " . $stmt->error);
+            return false;
+        }
+
+        // Get the result
+        $stmt->bind_result($canceledCount);  // Bind the result to the canceledCount variable
+        $stmt->fetch();
+        $stmt->close();
+
+        // Return the count of canceled POs
+        return $canceledCount ? $canceledCount : 0;
+    } else {
+        error_log("Preparation failed: " . $conn->error);  // Log preparation error
+    }
+
+    return false;  // Return false if something went wrong
+}

@@ -1332,7 +1332,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 <body>
     <!--sidenav -->
     <div class="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform">
-        <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
+        <a href="admin_dashboard.php" class="flex items-center pb-4 border-b border-b-gray-800 hover:animate-bounce">
 
             <h2 class="text-2xl font-bold">Abans <span class="bg-[#a312b6] text-white px-2 rounded-md">Finance</span></h2>
         </a>

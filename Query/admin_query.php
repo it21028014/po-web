@@ -1,6 +1,7 @@
 <?php
 // admin_query.php
 
+// Function to fetch branch-wise and total amount
 function getBranchWiseAndTotalAmount($conn)
 {
     $currentMonth = date('m');
@@ -50,10 +51,24 @@ function getBranchWiseAndTotalAmount($conn)
         $stmt->close();
     }
 
-    // Return branch-wise and total details
     return [
         'branchDetails' => $branchDetails,
         'totalAmount' => $totalAmount,
         'totalFacilityCount' => $totalFacilityCount
     ];
+}
+
+// Function to fetch branch codes for dropdown
+function getBranchCodes($conn)
+{
+    $branchQuery = "SELECT BRANCH_CODE FROM mast_branch";
+    $branchCodes = [];
+
+    if ($result = $conn->query($branchQuery)) {
+        while ($row = $result->fetch_assoc()) {
+            $branchCodes[] = $row['BRANCH_CODE'];
+        }
+    }
+
+    return $branchCodes;
 }
